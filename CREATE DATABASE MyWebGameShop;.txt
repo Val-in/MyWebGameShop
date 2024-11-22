@@ -1,0 +1,97 @@
+CREATE DATABASE MyWebGameShop;
+
+Адреса
+CREATE TABLE Address (
+    Id INT PRIMARY KEY AUTO_INCREMENT,
+    Country VARCHAR(255),
+    City VARCHAR(255),
+    Street VARCHAR(255),
+    Building INT,
+    PostalCode INT
+);
+
+Контакты
+CREATE TABLE Contact (
+    Id INT PRIMARY KEY AUTO_INCREMENT,
+    Email VARCHAR(255),
+    Phone VARCHAR(50),
+    Fax VARCHAR(50)
+);
+
+Инфо
+CREATE TABLE ShopInfo (
+    Id INT PRIMARY KEY AUTO_INCREMENT,
+    ContactId INT,
+    AddressId INT,
+    FOREIGN KEY (ContactId) REFERENCES Contact(Id),
+    FOREIGN KEY (AddressId) REFERENCES Address(Id)
+);
+
+Главная инфо
+CREATE TABLE MainInformation (
+    Id INT PRIMARY KEY AUTO_INCREMENT,
+    History TEXT,
+    Owner VARCHAR(255),
+    Facts TEXT,
+    Specialization VARCHAR(255)
+);
+
+Главная страница
+CREATE TABLE MainPage (
+    Id INT PRIMARY KEY AUTO_INCREMENT,
+    ShopInfoId INT,
+    MainInformationId INT,
+    FOREIGN KEY (ShopInfoId) REFERENCES ShopInfo(Id),
+    FOREIGN KEY (MainInformationId) REFERENCES MainInformation(Id)
+);
+
+Рекомендации
+CREATE TABLE Recommendations (
+    Id INT PRIMARY KEY AUTO_INCREMENT,
+    Description TEXT,
+    RecommendationListId INT,
+    FOREIGN KEY (RecommendationListId) REFERENCES RecommendationList(Id)
+);
+
+Рекомендации список
+CREATE TABLE RecommendationList (
+    Id INT PRIMARY KEY AUTO_INCREMENT,
+    Description TEXT,
+    GameTitle VARCHAR(255),
+    GameVersion VARCHAR(50),
+    GameRate FLOAT,
+    RecommendationComment TEXT,
+    User VARCHAR(255)
+);
+
+
+
+Категории
+CREATE TABLE Category (
+    Id INT PRIMARY KEY AUTO_INCREMENT,
+    FreeGame BOOLEAN,
+    PC BOOLEAN,
+    Mobile BOOLEAN,
+    Genre VARCHAR(255) 
+);
+
+Подписки
+CREATE TABLE Subscriptions (
+    Id INT PRIMARY KEY AUTO_INCREMENT,
+    UserSubscriptionInfoId INT,
+    FOREIGN KEY (UserSubscriptionInfoId) REFERENCES UserSubscriptionInfo(Id)
+);
+
+Инфо о подписках юзера
+CREATE TABLE UserSubscriptionInfo (
+    Id INT PRIMARY KEY AUTO_INCREMENT,
+    SubscriptionType VARCHAR(255),
+    PaymentMethod VARCHAR(255),
+    SubscriptionStatus VARCHAR(255),
+    SubscriptionStartDate DATE,
+    SubscriptionEndDate DATE,
+    LastPaymentDate DATE,
+    SubscriptionTier VARCHAR(255),
+    PaymentHistory TEXT
+);
+
