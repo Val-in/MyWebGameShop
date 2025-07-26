@@ -4,7 +4,7 @@ using System.Diagnostics;
 
 namespace MyWebGameShop.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : Controller //почему все контроллеры возвращают View??
     {
         private readonly ILogger<HomeController> _logger;
 
