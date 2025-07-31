@@ -1,3 +1,8 @@
+using Microsoft.EntityFrameworkCore;
+using MyWebGameShop.Middleware;
+using MyWebGameShop.Services.Implementations;
+using MyWebGameShop.Services.Interfaces;
+
 namespace MyWebGameShop
 {
     public class Program
@@ -5,9 +10,17 @@ namespace MyWebGameShop
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+            
+            // Получаем строку подключения
+            string connection = builder.Configuration.GetConnectionString("DefaultConnection");
+
+            // Добавляем DbContext
+            builder.Services.AddDbContext<DbContext>(options =>
+                options.UseNpgsql(connection));
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            builder.Services.AddScoped<IUserService, UserService>();
 
             var app = builder.Build();
 
@@ -23,6 +36,8 @@ namespace MyWebGameShop
             app.UseStaticFiles();
 
             app.UseRouting();
+            
+            app.UseMiddleware<LoggingMiddleware>();
 
             app.UseAuthorization();
 
