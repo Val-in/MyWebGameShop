@@ -9,4 +9,6 @@ public class User
     public string Password { get; set; }
     public string Email { get; set; }
     public int WalletBalance { get; set; }
+    public DateTime Joined { get; set; }
+    
 }
