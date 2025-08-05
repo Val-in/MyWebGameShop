@@ -21,6 +21,7 @@ public class AppDbContext : DbContext
     public DbSet<Category> Categories { get; set; }
     public DbSet<Contact> Contacts { get; set; }
     public DbSet<ErrorViewModel> ErrorViewModels { get; set; }
+    public DbSet<Feedback> Feedbacks { get; set; }
     public DbSet<Game> Games { get; set; }
     public DbSet<MainInformation> MainInformations { get; set; }
     public DbSet<MainPage> MainPages { get; set; }

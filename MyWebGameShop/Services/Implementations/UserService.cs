@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using MyWebGameShop.Data;
 using MyWebGameShop.Models;
 using MyWebGameShop.Services.Interfaces;
 
@@ -9,10 +10,10 @@ namespace MyWebGameShop.Services.Implementations;
 /// </summary>
 public class UserService : IUserService
 {
-    private readonly DbContext _context;
+    private readonly AppDbContext _context;
   
     // Метод-конструктор для инициализации
-    public UserService(DbContext context)
+    public UserService(AppDbContext context)
     {
         _context = context;
     }

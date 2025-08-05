@@ -5,21 +5,7 @@ using MyWebGameShop.Models;
 
 namespace MyWebGameShop.ViewModels;
 
-public class RegisterViewModel //запуталась, что куда передаем...
+public class RegisterViewModel //запуталась, что куда передаем..., это не надо тут делать, надо в контроллер
 {
-    [HttpPost]
-    public async Task Register(User user)
-    {
-        user.Joined = DateTime.Now;
-        user.Id = 3;
- 
-        // Добавление пользователя
-        var entry = _context.Entry(user);
-        if (entry.State == EntityState.Detached)
-            await _context.Users.AddAsync(user);
-  
-        // Сохранение изменений
-        await _context.SaveChangesAsync();
-        await Console.WriteLine($"Registration successful, {user.UserName}");
-    }
+
 }
