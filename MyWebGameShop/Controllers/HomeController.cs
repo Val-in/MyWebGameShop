@@ -24,7 +24,7 @@ namespace MyWebGameShop.Controllers
         {
             var newUser = new User
             {
-                Id = 2,
+                Id = new Guid(),
                 UserName = "Katya",
                 UserAgent = HttpContext.Request.Headers["User-Agent"],
                 Login = "fgfg",

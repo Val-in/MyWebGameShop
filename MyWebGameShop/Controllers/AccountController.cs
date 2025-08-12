@@ -43,5 +43,5 @@ public class AccountController : Controller
         // Сохранение изменений
         await _context.SaveChangesAsync();
         await Console.WriteLine($"Registration successful, {user.UserName}");
-    }  как работает эта логика в примере*/
+    }  как работает эта логика в примере, это прямое обращение, а не через прослойку, так делать не надо*/ 
 }

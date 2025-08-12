@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using MyWebGameShop.Data;
 using MyWebGameShop.Middleware;
 using MyWebGameShop.Services.Implementations;
 using MyWebGameShop.Services.Interfaces;
@@ -15,8 +16,8 @@ namespace MyWebGameShop
             string connection = builder.Configuration.GetConnectionString("DefaultConnection");
 
             // Добавляем DbContext
-            builder.Services.AddDbContext<DbContext>(options =>
-                options.UseNpgsql(connection));
+            builder.Services.AddDbContext<AppDbContext>(options =>
+                options.UseNpgsql(connection)); //метод AddDbContext, его тип AddDbContext
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();

@@ -25,11 +25,11 @@ public class LoggingMiddleware
     /// </summary>
     public async Task InvokeAsync(HttpContext context)
     {
-        string userAgent = context.Request.Headers["User-Agent"].ToString();
+        string userAgent = context.Request.Headers["User-Agent"].ToString(); //как здесь работать с БД и данными??
         
         var newUser = new User()
         {
-            Id = 1,
+            Id = new Guid(),
             UserName = "Vova",
             UserAgent = userAgent,
             Login = "KK",

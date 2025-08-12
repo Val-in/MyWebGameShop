@@ -1,0 +1,6 @@
+CREATE TABLE Games (
+    Id SERIAL PRIMARY KEY,
+    Title TEXT NOT NULL,
+    Description TEXT NOT NULL,
+    Price INTEGER NOT NULL
+);

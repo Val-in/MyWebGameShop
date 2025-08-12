@@ -8,6 +8,6 @@ namespace MyWebGameShop.Models
         public bool PC {  get; set; }
         public bool Mobile { get; set; }
         public Genre Genre { get; set; }
-
+        public List<Game> Games { get; set; }
     }
 }

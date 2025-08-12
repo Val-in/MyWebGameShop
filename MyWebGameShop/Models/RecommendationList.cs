@@ -8,5 +8,6 @@
         public float GameRate { get; set; }
         public string RecommendationComment { get; set; }
         public string User { get; set; }
+        public Recommendations Recommendations { get; set; }
     }
 }

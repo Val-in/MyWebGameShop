@@ -1,0 +1,7 @@
+CREATE TABLE Categories (
+    Id SERIAL PRIMARY KEY,
+    FreeGame BOOLEAN NOT NULL,
+    PC BOOLEAN NOT NULL,
+    Mobile BOOLEAN NOT NULL,
+    Genre INTEGER NOT NULL
+);
