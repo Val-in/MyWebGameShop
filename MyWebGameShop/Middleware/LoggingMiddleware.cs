@@ -1,6 +1,5 @@
+using MyWebGameShop.Data;
 using MyWebGameShop.Models;
-using MyWebGameShop.Services.Implementations;
-using MyWebGameShop.Services.Interfaces;
 
 namespace MyWebGameShop.Middleware;
 
@@ -8,47 +7,33 @@ public class LoggingMiddleware
 {
     private readonly RequestDelegate _next;
     private readonly ILogger<LoggingMiddleware> _logger;
-    private readonly UserService _userService;
+    private readonly AppDbContext _context;
   
     /// <summary>
     ///  Middleware-компонент должен иметь конструктор, принимающий RequestDelegate
     /// </summary>
-    public LoggingMiddleware(RequestDelegate next, ILogger<LoggingMiddleware> logger, UserService userService)
+    public LoggingMiddleware(RequestDelegate next, ILogger<LoggingMiddleware> logger, AppDbContext context)
     {
         _next = next;
         _logger = logger;
-        _userService = userService;
+        _context = context;
     }
   
-    /// <summary>
-    ///  Необходимо реализовать метод Invoke  или InvokeAsync
-    /// </summary>
     public async Task InvokeAsync(HttpContext context)
     {
-        string userAgent = context.Request.Headers["User-Agent"].ToString(); //как здесь работать с БД и данными??
-        
-        var newUser = new User()
+        string userAgent = context.Request.Headers["User-Agent"].ToString();
+
+        var logEntry = new LogEntry
         {
-            Id = new Guid(),
-            UserName = "Vova",
             UserAgent = userAgent,
-            Login = "KK",
-            Password = "Pass",
-            Email = "aa@aa.com",
-            WalletBalance = 10
+            Timestamp = DateTime.UtcNow
         };
-        
-        _userService.AddUser(newUser);
-        LogConsole(context);
-        await LogFile(context);
-  
-        // Передача запроса далее по конвейеру
-        await _next.Invoke(context);
-    }
-    
-    private async void LogConsole(HttpContext context)
-    {
+
+        await _context.Logs.AddAsync(logEntry);
+        await _context.SaveChangesAsync();
+
         _logger.LogInformation("New request: {method} {url}", context.Request.Method, context.Request.Path);
+
         await _next(context);
     }
  

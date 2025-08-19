@@ -14,14 +14,21 @@ public class ProductService : IProductService
         _context = context;
     }
 
-    public async Task<List<Game>> GetAllProductsAsync()
+    public async Task<IEnumerable<Game>> GetAllProductsAsync()
     {
         return await _context.Games.ToListAsync();
     }
 
-    public async Task<Game> GetProductByIdAsync(Guid productId)
+    public Task<Game> GetProductByIdAsync(Guid productId)
     {
-        return await _context.Games.FindAsync(productId);
+        throw new NotImplementedException();
+    }
+
+    public async Task<Game> GetProductByIdAsync(int productId)
+    {
+        return await _context.Games
+            .Include(g => g.Category)
+            .FirstOrDefaultAsync(g => g.Id == productId);
     }
 
     public async Task<List<Game>> SearchProductsAsync(string keyword)

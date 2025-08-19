@@ -1,6 +1,8 @@
+using MyWebGameShop.Services.Interfaces;
+
 namespace MyWebGameShop.Services.Implementations;
 
-public class SubscriptionService
+public class SubscriptionService : ISubscriptionService
 {
     
 }

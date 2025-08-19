@@ -22,6 +22,11 @@ namespace MyWebGameShop
             // Add services to the container.
             builder.Services.AddControllersWithViews();
             builder.Services.AddScoped<IUserService, UserService>();
+            builder.Services.AddScoped<ILogService, LogService>();
+            builder.Services.AddScoped<ICartService, CartService>();
+            builder.Services.AddScoped<IProductService, ProductService>();
+            builder.Services.AddScoped<IOrderService, OrderService>();
+            builder.Services.AddScoped<ISubscriptionService, SubscriptionService>();
 
             var app = builder.Build();
 

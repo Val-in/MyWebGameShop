@@ -22,9 +22,9 @@ namespace MyWebGameShop.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var newUser = new User
+            var newUser = new User //исправить логику с бд, удалить юзера
             {
-                Id = new Guid(),
+                Id = 1,
                 UserName = "Katya",
                 UserAgent = HttpContext.Request.Headers["User-Agent"],
                 Login = "fgfg",
