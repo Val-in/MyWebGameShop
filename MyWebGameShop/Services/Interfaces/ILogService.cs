@@ -4,5 +4,5 @@ namespace MyWebGameShop.Services.Interfaces;
 
 public interface ILogService
 {
-    Task WriteLogAsync(LogEntry entry);
+    Task WriteLogAsync(Request entry);
 }

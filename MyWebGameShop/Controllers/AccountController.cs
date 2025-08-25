@@ -6,6 +6,7 @@ using MyWebGameShop.Services.Implementations;
 
 namespace MyWebGameShop.Controllers;
 
+[Route("account")]
 public class AccountController : Controller 
 {
     private readonly UserService _userService;
@@ -15,33 +16,41 @@ public class AccountController : Controller
     {
         _userService = userService;
     }
-
-    [HttpGet]
+    
+    [HttpGet("register")]
     public IActionResult Register()
     {
         return View();
     }
     
-    [HttpPost]
+    [HttpPost("register")]
     public async Task <IActionResult> Register (User newUser)
     {
         await _userService.AddUser(newUser);
         return View(newUser);
     }
     
-    /*[HttpPost]
-    public async Task Register(User user)
+    [HttpGet("login")]
+    public IActionResult Login(string returnUrl = null) =>
+        View(new LoginViewModel());
+
+    [HttpPost("login")]
+    public async Task<IActionResult> Login(LoginViewModel vm)
     {
-        user.Joined = DateTime.Now;
-        user.Id = 3;
- 
-        // Добавление пользователя
-        var entry = _context.Entry(user);
-        if (entry.State == EntityState.Detached)
-            await _context.Users.AddAsync(user);
-  
-        // Сохранение изменений
-        await _context.SaveChangesAsync();
-        await Console.WriteLine($"Registration successful, {user.UserName}");
-    }  как работает эта логика в примере, это прямое обращение, а не через прослойку, так делать не надо*/ 
+        if (!ModelState.IsValid) return View(vm);
+        var res = await _signIn.PasswordSignInAsync(vm.Email, vm.Password, vm.RememberMe, false);
+        if (!res.Succeeded)
+        {
+            ModelState.AddModelError("", "Неверные учётные данные");
+            return View(vm);
+        }
+        return RedirectToAction("Index", "Home");
+    }
+
+    [HttpPost("logout")]
+    public async Task<IActionResult> Logout()
+    {
+        await _signIn.SignOutAsync();
+        return RedirectToAction("Index", "Home");
+    }
 }

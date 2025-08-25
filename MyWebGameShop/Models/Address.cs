@@ -8,6 +8,5 @@
         public int Building { get; set; }
         public int PostalCode { get; set; }
         public User User { get; set; }
-        public User UserId { get; set; }
     }
 }

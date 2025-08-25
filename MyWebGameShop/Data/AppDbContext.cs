@@ -220,8 +220,7 @@ public class AppDbContext : DbContext
                 e.ToTable("LogEntries");
                 e.HasKey(l => l.Id);
                 e.Property(l => l.Timestamp).IsRequired();
-                
-                
+                e.Property(l => l.Url).IsRequired();
             });
         });
 

@@ -19,11 +19,6 @@ public class ProductService : IProductService
         return await _context.Games.ToListAsync();
     }
 
-    public Task<Game> GetProductByIdAsync(Guid productId)
-    {
-        throw new NotImplementedException();
-    }
-
     public async Task<Game> GetProductByIdAsync(int productId)
     {
         return await _context.Games

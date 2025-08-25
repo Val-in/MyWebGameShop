@@ -12,8 +12,7 @@ namespace MyWebGameShop.Models
         public Date LastPaymentDate { get; set; }
         public string SubscriptionTier { get; set; }
         public string PaymentHistory { get; set; }
-        public User UserId { get; set; }
-        public Subscriptions SubscriptionId { get; set; }
+
         public User User { get; set; }
         public Subscriptions Subscription { get; set; }
     }

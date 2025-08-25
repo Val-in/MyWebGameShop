@@ -27,15 +27,24 @@ namespace MyWebGameShop
             builder.Services.AddScoped<IProductService, ProductService>();
             builder.Services.AddScoped<IOrderService, OrderService>();
             builder.Services.AddScoped<ISubscriptionService, SubscriptionService>();
+            /*(Если пользователь сделал запрос → сервис создаётся → работает пока идёт запрос → потом уничтожается).
+            Есть ещё AddSingleton (один объект на всё приложение) и AddTransient (новый объект при каждом обращении).
+            – Если где-то в коде попросят IUserService, то DI даст экземпляр класса UserService.
+            Аналогично для ILogService → LogService, ICartService → CartService, и т.д.
+            AddScoped<IService, Service>() → настраивает внедрение зависимостей: "когда просят интерфейс, отдай этот класс".
+            Если в контроллере два раза вызывается Transient → два разных экземпляра.
+            Если два раза вызывается Scoped → один экземпляр для всего запроса.*/
 
             var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
+            // Configure the HTTP request pipeline (конвейер обработки HTTP-запросов).
             if (!app.Environment.IsDevelopment())
             {
                 app.UseExceptionHandler("/Home/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
+                /*HSTS = HTTP Strict Transport Security.
+                Заставляет браузер всегда использовать HTTPS.*/
             }
 
             app.UseHttpsRedirection();
@@ -50,6 +59,11 @@ namespace MyWebGameShop
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
+            /*Если ввести в браузере /Products/List/5
+                → controller = Products, action = List, id = 5.
+
+                Если просто /
+                → попадём в HomeController, метод Index().*/
 
             app.Run();
         }

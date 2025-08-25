@@ -1,31 +1,6 @@
 @{
-    ViewData["Title"] = "View project authors";
+    ViewData["Title"] = "Add Feedback";
 }
- 
-<style>
-     table {
-       border-spacing: 0 15px;
-       align-self: center;
-     }
-     th {
-       background-color: #4287f5;
-       color: white;
-     }
-     th,
-     td {
-       width: 150px;
-       text-align: center;
-       border: none;
-       padding: 5px;
-     }
-     h2 {
-       color: #4287f5;
-     }
-     .submit-button{
-       position: absolute;
-       margin-left: 140px;
-     }
-   </style>
 
 <script>
 
@@ -37,7 +12,7 @@
         data.set("From", document.querySelector('[name="From"]').value)
         data.set("Text", document.querySelector('[name="Text"]').value)
 
-        // создаем объект запроса
+        // создаем объект AJAX-запроса,
         let postRequest = new XMLHttpRequest();
         postRequest.open('POST', document.URL, true ); /* true = запрос будет выполнен асинхронно */
 
@@ -46,21 +21,21 @@
 
         // Функция - обработчик результата с сервера
         postRequest.onload =  function () {
-            // сохраняем ответ сервера. не лишним будет также добавить проверку на успешный запрос
-            let serverMessage = this.response;
+            // сохраняем ответ сервера, не лишним будет также добавить проверку на успешный запрос
+            let serverMessage = this.response; //this.response → текст, который вернул сервер (например, «Спасибо за отзыв»).
 
             /* Код ниже изменяет значение формы */
 
             // Находим контейнер
             let element = document.getElementsByClassName("container")[1];
-            // Удаляем вложенный контейнер с формой
+            // Удаляем вложенный контейнер с формой, первого потомка (то есть форму с полями).
             element.children[0].remove();
 
             // Создаем новый элемент
             let paragraph = document.createElement("h5");
             // Добавляем ему стиль
             paragraph.style = "text-align : center"
-            // Сохраняем в него сообщение сервера
+            // Сохраняем в него сообщение сервера, JS удаляет форму и показывает сообщение сервера вместо неё.
             paragraph.innerText = serverMessage;
 
             // Добавляем дочерные элементы на страницу

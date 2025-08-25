@@ -25,8 +25,10 @@ public class LoggingMiddleware
 
         var logEntry = new LogEntry
         {
+            Id = Guid.NewGuid(),
             UserAgent = userAgent,
-            Timestamp = DateTime.UtcNow
+            Timestamp = DateTime.UtcNow,
+            Url = context.Request.Path + context.Request.QueryString
         };
 
         await _context.Logs.AddAsync(logEntry);
