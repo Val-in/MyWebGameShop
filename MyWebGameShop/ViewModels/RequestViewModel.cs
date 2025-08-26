@@ -2,5 +2,7 @@ namespace MyWebGameShop.ViewModels;
 
 public class RequestViewModel
 {
-    //посмотреть историю запросов к проекту, Представление должно быть доступно по адресу https://localhost:5001/logs.
+    public string Url { get; set; }
+    public string UserAgent { get; set; }
+    public DateTime Date { get; set; }
 }
