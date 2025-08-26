@@ -33,22 +33,12 @@ public class OrderService : IOrderService
         return order;
     }
 
-    public async Task<List<Order>> GetUserOrdersAsync(int userId)
+    public async Task<List<Order>> GetOrderByUserAsync(int userId)
     {
         return await _context.Orders
             .Where(o => o.UserId == userId)
             .Include(o => o.CartItems)
             .ThenInclude(ci => ci.Game)
             .ToListAsync();
-    }
-
-    public Task<Order> CreateOrderAsync(Guid userId)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task<List<Order>> GetUserOrdersAsync(Guid userId)
-    {
-        throw new NotImplementedException();
     }
 }

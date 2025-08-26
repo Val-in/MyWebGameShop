@@ -2,10 +2,10 @@ using MyWebGameShop.Models;
 
 namespace MyWebGameShop.Services.Interfaces;
 
-public interface ICartService //дописать сервисы
+public interface ICartService 
 {
-    Task AddToCartAsync(Guid userId, Guid productId, int quantity); //int
-    Task RemoveFromCartAsync(Guid cartItemId);
-    Task<List<CartItem>> GetUserCartAsync(Guid userId);
-    Task ClearCartAsync(Guid cartItemId);
+    Task AddToCartAsync(int userId, int productId, int quantity);
+    Task RemoveFromCartAsync(int cartItemId);
+    Task<List<CartItem>> GetUserCartAsync(int userId);
+    Task ClearCartAsync(int cartItemId);
 }

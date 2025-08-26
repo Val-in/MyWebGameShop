@@ -4,7 +4,9 @@ namespace MyWebGameShop.Services.Interfaces;
 
 public interface ISubscriptionService
 {
-    Task<IEnumerable<Subscriptions>> GetSubscriptionsByUserAsync(User id);
-    Task SubscribeAsync(User id, int subscriptionId);
-    Task UnsubscribeAsync(User id, int subscriptionId);
+    Task<List<SubscriptionUserInfo>> GetSubscriptionsByUserAsync(int userId);
+    Task SubscribeAsync(int userId, int subscriptionId); //Что передаём: только идентификаторы (числа) пользователя и подписки.
+                                                         //Зачем: сервис сам ищет объекты в базе по этим id через DbContext.
+    
+    Task UnsubscribeAsync(int userId, int subscriptionId);
 }

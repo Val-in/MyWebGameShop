@@ -11,14 +11,13 @@ namespace MyWebGameShop.Services.Implementations;
 public class UserService : IUserService
 {
     private readonly AppDbContext _context;
-    private readonly List < User > _users = new List < User > ();
 
     // Метод-конструктор для инициализации
     public UserService(AppDbContext context)
     {
         _context = context;
     }
-    public async Task AddUser(User user) //взаимодействие с базой данных — это потенциально длительная операция, поэтому уместно использовать асинхронные методы, возвращающие Task.
+    public async Task AddUserAsync(User user) //взаимодействие с базой данных — это потенциально длительная операция, поэтому уместно использовать асинхронные методы, возвращающие Task.
     {
         var entry = _context.Entry(user);
         if (entry.State == EntityState.Detached)
@@ -28,17 +27,31 @@ public class UserService : IUserService
         await _context.SaveChangesAsync();
     }
     
-    public async Task<User[]> GetUsers()
+    public async Task<User[]> GetUsersAsync()
     {
-        // Получим всех активных пользователей
-        return await _context.Set<User>().ToArrayAsync();
+        return await _context.Users.ToArrayAsync();
     }
     
-    public User GetByLogin(string login)
+    public async Task<User> GetByLoginAsync(string login)
     {
         if (string.IsNullOrWhiteSpace(login))
             return null;
 
-        return _users.FirstOrDefault(u => u.Login.Equals(login, StringComparison.OrdinalIgnoreCase));
+        return await _context.Users
+            .FirstOrDefaultAsync(u => u.Login.ToLower() == login.ToLower());
+    }
+
+    public async Task<User> GetByEmailAsync(string userEmail)
+    {
+        if (string.IsNullOrWhiteSpace(userEmail))
+            return null;
+
+        return await _context.Users
+            .FirstOrDefaultAsync(u => u.Email.ToLower() == userEmail.ToLower());
+    }
+
+    public async Task<User> GetByIdAsync(int userId)
+    {
+        return await _context.Users.FindAsync(userId);
     }
 }

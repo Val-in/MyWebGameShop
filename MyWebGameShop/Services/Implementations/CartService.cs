@@ -26,12 +26,7 @@ public class CartService : ICartService
         await _context.SaveChangesAsync();
     }
 
-    public Task AddToCartAsync(Guid userId, Guid productId, int quantity)
-    {
-        throw new NotImplementedException();
-    }
-
-    public async Task RemoveFromCartAsync(Guid cartItemId)
+    public async Task RemoveFromCartAsync(int cartItemId)
     {
         var item = await _context.CartItems.FindAsync(cartItemId);
         if (item != null)
@@ -40,17 +35,19 @@ public class CartService : ICartService
             await _context.SaveChangesAsync();
         }
     }
-
-    public Task<List<CartItem>> GetUserCartAsync(Guid userId)
-    {
-        throw new NotImplementedException();
-    }
-
+    
     public async Task<List<CartItem>> GetUserCartAsync(int userId)
     {
         return await _context.CartItems
             .Where(ci => ci.UserId == userId)
             .Include(ci => ci.Game)
             .ToListAsync();
+    }
+
+    public async Task ClearCartAsync(int userId)
+    {
+        var items = _context.CartItems.Where(ci => ci.UserId == userId);
+        _context.CartItems.RemoveRange(items);
+        await _context.SaveChangesAsync();
     }
 }

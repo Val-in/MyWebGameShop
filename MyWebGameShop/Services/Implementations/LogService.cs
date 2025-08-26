@@ -13,9 +13,9 @@ public class LogService : ILogService
         _context = context;
     }
 
-    public async Task WriteLogAsync(LogEntry entry)
+    public async Task WriteLogAsync(Request entry)
     {
-        _context.Logs.Add(entry);
+        _context.Requests.Add(entry);
         await _context.SaveChangesAsync();
     }
 }
