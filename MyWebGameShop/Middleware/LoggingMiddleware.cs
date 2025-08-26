@@ -21,31 +21,43 @@ public class LoggingMiddleware
   
     public async Task InvokeAsync(HttpContext context)
     {
-        string userAgent = context.Request.Headers["User-Agent"].ToString();
-
-        var logEntry = new LogEntry
+        try
         {
-            Id = Guid.NewGuid(),
-            UserAgent = userAgent,
-            Timestamp = DateTime.UtcNow,
-            Url = context.Request.Path + context.Request.QueryString
-        };
+            var logEntry = new Request()
+            {
+                Id = Guid.NewGuid(),
+                UserAgent = context.Request.Headers["User-Agent"].ToString(),
+                Date = DateTime.UtcNow,
+                Url = context.Request.Path + context.Request.QueryString
+            };
 
-        await _context.Logs.AddAsync(logEntry);
-        await _context.SaveChangesAsync();
+            await _context.Requests.AddAsync(logEntry);
+            await _context.SaveChangesAsync();
 
-        _logger.LogInformation("New request: {method} {url}", context.Request.Method, context.Request.Path);
+            _logger.LogInformation("New request: {method} {url}", context.Request.Method, context.Request.Path);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error logging request");
+        }
 
-        await _next(context);
+        await _next(context); //_next — это делегат RequestDelegate, который указывает, какой middleware будет выполняться после текущего.
+                             //_next гарантирует, что все остальные middleware и MVC-контроллеры тоже выполнятся.
     }
  
-    private async Task LogFile(HttpContext context)
-    {
-        // Строка для публикации в лог
-        string logMessage = $"[{DateTime.Now}]: New request to http://{context.Request.Host.Value + context.Request.Path}{Environment.NewLine}";
-      
-        string logFilePath = Path.Combine(Directory.GetCurrentDirectory(), "Logs", "RequestLog.txt");
-        Directory.CreateDirectory(Path.GetDirectoryName(logFilePath)!);
-        await File.AppendAllTextAsync(logFilePath, logMessage);
-    }
+    //Вынести в сервис
+    // private async Task LogFile(HttpContext context)
+    // {
+    //     // Строка для публикации в лог
+    //     string logMessage = $"[{DateTime.Now}]: New request to http://{context.Request.Host.Value + context.Request.Path}{Environment.NewLine}";
+    //   
+    //     string logFilePath = Path.Combine(Directory.GetCurrentDirectory(), "Logs", "RequestLog.txt");
+    //     Directory.CreateDirectory(Path.GetDirectoryName(logFilePath)!);
+    //     await File.AppendAllTextAsync(logFilePath, logMessage);
+    //     
+    //     var users = _context.Users.ToList();
+    //     Console.WriteLine("See all blog users:");
+    //     foreach (var user in users)
+    //         Console.WriteLine($"User name {user.UserName}, Balance {user.WalletBalance}");
+    // }
 }
