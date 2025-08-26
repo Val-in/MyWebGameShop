@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MyWebGameShop.Models;
 
-[Table("Requests")] //если есть здесь, то нужно в другие модели добавить атрибут? не надо
+[Table("Requests")]
 public class Request
 {
     [Key]

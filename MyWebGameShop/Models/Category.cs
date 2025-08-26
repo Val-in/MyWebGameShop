@@ -2,12 +2,18 @@
 
 namespace MyWebGameShop.Models
 {
+    /// <summary>
+    /// Category – Games : 1 → many
+    /// Category – Products : 1 → many
+    /// </summary>
     public class Category
     {
-        public bool FreeGame { get; set; }
-        public bool PC {  get; set; }
-        public bool Mobile { get; set; }
+        public int Id { get; set; }
+        public Platform Platform { get; set; }
         public Genre Genre { get; set; }
+        
+        // связь 1 ко многим
         public List<Game> Games { get; set; }
+        public List<Product> Products { get; set; }
     }
 }
