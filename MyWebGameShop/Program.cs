@@ -21,12 +21,14 @@ namespace MyWebGameShop
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
-            builder.Services.AddScoped<IUserService, UserService>();
-            builder.Services.AddScoped<ILogService, LogService>();
             builder.Services.AddScoped<ICartService, CartService>();
-            builder.Services.AddScoped<IProductService, ProductService>();
+            builder.Services.AddScoped<IFeedbackService, FeedbackService>();
+            builder.Services.AddScoped<ILogService, LogService>();
             builder.Services.AddScoped<IOrderService, OrderService>();
+            builder.Services.AddScoped<IProductService, ProductService>();
             builder.Services.AddScoped<ISubscriptionService, SubscriptionService>();
+            builder.Services.AddScoped<IUserService, UserService>();
+
             /*(Если пользователь сделал запрос → сервис создаётся → работает пока идёт запрос → потом уничтожается).
             Есть ещё AddSingleton (один объект на всё приложение) и AddTransient (новый объект при каждом обращении).
             – Если где-то в коде попросят IUserService, то DI даст экземпляр класса UserService.
