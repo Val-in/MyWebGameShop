@@ -27,7 +27,6 @@ public class AppDbContext : DbContext
     public DbSet<Product> Products { get; set; }
     public DbSet<Recommendation> Recommendations { get; set; }
     public DbSet<Request> Requests { get; set; }
-    public DbSet<Role> Roles { get; set; }
     public DbSet<ShopInfo> ShopInfo { get; set; }
     public DbSet<Subscriptions> Subscriptions { get; set; }
     public DbSet<User> Users { get; set; }
@@ -180,8 +179,6 @@ public class AppDbContext : DbContext
             e.Property(r => r.Url).IsRequired();
         });
         
-        //для Role не создаем отдельный modelBuilder
-        
         modelBuilder.Entity<ShopInfo>(e =>
         {
             e.ToTable("ShopInfos");
@@ -210,7 +207,6 @@ public class AppDbContext : DbContext
             e.Property<DateTime>("SubscriptionStartDate").IsRequired();
             e.Property<DateTime>("SubscriptionEndDate").IsRequired();
             e.Property<DateTime>("LastPaymentDate").IsRequired();
-            e.Property(ui => ui.SubscriptionTier).IsRequired();
             e.Property(ui => ui.PaymentHistory).IsRequired();
             e.ToTable("UserSubscriptionInfos");
             e.HasKey(u => u.Id);
@@ -235,11 +231,7 @@ public class AppDbContext : DbContext
                 e.Property(u => u.Password).IsRequired();
                 e.Property(u => u.Email).IsRequired();
                 e.Property(u => u.WalletBalance).IsRequired();
-                
-                e.HasOne(u => u.Role)
-                    .WithMany(r => r.Users)
-                    .HasForeignKey(u => u.RoleId)
-                    .OnDelete(DeleteBehavior.Restrict);
+                e.Property(u => u.Role).IsRequired();
             });
        }
 };
