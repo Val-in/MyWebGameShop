@@ -1,11 +1,8 @@
-﻿using static System.Runtime.InteropServices.JavaScript.JSType;
-
-namespace MyWebGameShop.Models
+﻿namespace MyWebGameShop.Models
 {
-    public class UserSubscriptionInfo
+    public class SubscriptionUserInfo
     {
         public int Id { get; set; }
-        public string SubscriptionType { get; set; }
         public string PaymentMethod { get; set; }
         public string SubscriptionStatus { get; set; }
         public DateTime SubscriptionStartDate { get; set; }

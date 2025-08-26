@@ -8,9 +8,8 @@ namespace MyWebGameShop.Models
     /// </summary>
     public class Category
     {
-        public int Id { get; set; }
-        public Platform Platform { get; set; }
-        public Genre Genre { get; set; }
+        public PlatformEnum PlatformEnum { get; set; }
+        public GenreEnum GenreEnum { get; set; }
         
         // связь 1 ко многим
         public List<Game> Games { get; set; }

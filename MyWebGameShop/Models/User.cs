@@ -27,5 +27,6 @@ public class User
     //связь "один-ко-многим", внешний ключ (UserId) будет создан в таблице CartItems, а не в Users.
     //EF сам понимает, что связь "у User много CartItems", и создаст поле UserId в таблице CartItems.
     public List<CartItem> CartItems { get; set; }
-    public List<UserSubscriptionInfo> UserSubscriptionInfos { get; set; }
+    public List<SubscriptionUserInfo> SubscriptionUserInfos { get; set; }
+    public List<Recommendation> Recommendations { get; set; }
 }

@@ -1,4 +1,4 @@
-namespace MyWebGameShop.Models
+namespace MyWebGameShop.ViewModels.ErrorViewModel
 {
     public class ErrorViewModel
     {

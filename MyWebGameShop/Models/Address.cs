@@ -1,7 +1,10 @@
-﻿namespace MyWebGameShop.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace MyWebGameShop.Models
 {
     public class Address
     {
+        [Required]
         public int Id { get; set; }
         public string Country { get; set; }
         public string City { get; set; }

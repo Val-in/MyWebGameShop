@@ -12,6 +12,6 @@ public class Request
     public  DateTime Date { get; set; }
     [Required]
     public  string  Url { get; set; }
-    
+
     public bool IsLog { get; set; }
 }
