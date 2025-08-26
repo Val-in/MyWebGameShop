@@ -1,33 +1,38 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using MyWebGameShop.Data;
 using MyWebGameShop.Models;
-using MyWebGameShop.Services.Implementations;
+using MyWebGameShop.Services.Interfaces;
+using MyWebGameShop.ViewModels;
 
 namespace MyWebGameShop.Controllers;
 
-[Route("account")]
+[Route("account")] //префикс для всех маршрутов в этом контроллере. Например, [HttpGet("register")] → /account/register
 public class AccountController : Controller 
 {
-    private readonly UserService _userService;
-  
-    // Метод-конструктор для инициализации
-    public AccountController(UserService userService)
+    private readonly IUserService _userService;
+    private readonly SignInManager<User> _signIn;
+    
+    public AccountController(IUserService userService,  SignInManager<User> signIn)
     {
         _userService = userService;
+        _signIn = signIn;
     }
     
     [HttpGet("register")]
     public IActionResult Register()
     {
-        return View();
+        return View(); //возвращает Razor-View Register.cshtml
     }
     
     [HttpPost("register")]
     public async Task <IActionResult> Register (User newUser)
     {
-        await _userService.AddUser(newUser);
-        return View(newUser);
+        if (!ModelState.IsValid)
+            return View(newUser);
+
+        await _userService.AddUserAsync(newUser);
+
+        return RedirectToAction("Login");
     }
     
     [HttpGet("login")]

@@ -1,7 +1,7 @@
 using System.Security.Authentication;
 using AutoMapper;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using MyWebGameShop.Models;
 using MyWebGameShop.Services.Interfaces;
 using MyWebGameShop.ViewModels;
@@ -12,28 +12,39 @@ public class UserController
 {
     private readonly IUserService _userService;
     private readonly IMapper _mapper;
+    private readonly ILogger<UserController> _logger; //типированный, DI сможет корректно внедрить
 
-    public UserController(IUserService userService, IMapper mapper)
+    public UserController(IUserService userService, IMapper mapper, ILogger<UserController> logger)
     {
         _userService = userService;
         _mapper = mapper;
+        _logger = logger;
     }
 
     [HttpPost]
     [Route("authenticate")]
-    public UserViewModel Authenticate(string login, string password) //нужен ли nuget cookies?
+    public async Task<UserViewModel> Authenticate(string login, string password) 
     {
-        if (String.IsNullOrEmpty(login) ||
-            String.IsNullOrEmpty(password))
-            throw new ArgumentNullException("Запрос не корректен");
+        if (string.IsNullOrEmpty(login) || string.IsNullOrEmpty(password))
+            throw new ArgumentNullException("Запрос некорректен");
 
-        User user = _userService.GetByLogin(login);
-        if (user is null)
-            throw new AuthenticationException("Пользователь на найден");
+        var user = await _userService.GetByLoginAsync(login);
+        if (user == null)
+            throw new AuthenticationException("Пользователь не найден");
 
         if (user.Password != password)
             throw new AuthenticationException("Введенный пароль не корректен");
+        _logger.LogInformation("Пользователь {login} авторизовался", login);
 
-        return _mapper.Map < UserViewModel > (user); //как тут происходит маппинг?
+        return _mapper.Map<UserViewModel>(user); 
+        
     }
+    
+    //Ошибка
+    // public async Task<IActionResult> Users()
+    // {
+    //     var users = await _userService.GetUsersAsync();
+    //     var userVms = _mapper.Map<List<UserViewModel>>(users);
+    //     return View(userVms);
+    // }
 }

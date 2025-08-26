@@ -1,35 +1,34 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using MyWebGameShop.Data;
+using MyWebGameShop.Models;
+using MyWebGameShop.Services.Interfaces;
 
 namespace MyWebGameShop.Controllers;
 
-[Route("logs")] //везде добавить слеши
-public class LogController : Controller
+[Route("logs")]
+public class LogController : Controller // //LogController → просмотр/ручное добавление логов
 {
-    private readonly AppDbContext _dbContext;
+    private readonly ILogService _logService;
 
-    public LogController(AppDbContext dbContext)
+    public LogController(ILogService logService)
     {
-        _dbContext = dbContext;
+        _logService = logService;
     }
 
-    [HttpGet]
-    public async Task<IActionResult> GetLogs()
+    [HttpPost]
+    public async Task<IActionResult> WriteLogAsync(Request entry)
     {
-        var logs = await _dbContext.Logs
-            .OrderByDescending(l => l.Timestamp)
-            .ToListAsync();
-        return Ok(logs);
+        await _logService.WriteLogAsync(entry);
+        return Ok();
     }
     
-    [HttpGet("/logs")] //запрос подконтроллера => получится logs/logs
-    public async Task<IActionResult> Index()
+    /*Вывести все логи
+    [HttpGet("logs")] //запрос подконтроллера => получится logs/logs
+    public async Task<IActionResult> Index() //Пользователь → контроллер → создание Request → вызов LogService →
+                                             //_context.Requests.Add() → SaveChangesAsync() → EF → SQL INSERT → Requests в БД
     {
-        // показываем то, что требовалось в задании 32.11.1 — из таблицы Requests
-        var data = await _dbContext.Requests
+        var data = await _logService.GetLog
             .OrderByDescending(r => r.Date)
             .ToListAsync();
         return View(data);
-    }
+    }*/
 }
