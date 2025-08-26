@@ -1,6 +1,6 @@
 ﻿namespace MyWebGameShop.Enums
 {
-    public enum Genre
+    public enum GenreEnum
     {
         Horror = 1,
         Detective = 2,
