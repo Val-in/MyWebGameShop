@@ -8,6 +8,7 @@ namespace MyWebGameShop.Models
     /// </summary>
     public class Category
     {
+        public string Name { get; set; }
         public PlatformEnum PlatformEnum { get; set; }
         public GenreEnum GenreEnum { get; set; }
         
