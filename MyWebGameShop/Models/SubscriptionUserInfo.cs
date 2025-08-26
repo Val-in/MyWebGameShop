@@ -8,7 +8,6 @@
         public DateTime SubscriptionStartDate { get; set; }
         public DateTime SubscriptionEndDate { get; set; }
         public DateTime LastPaymentDate { get; set; }
-        public string SubscriptionTier { get; set; }
         public string PaymentHistory { get; set; }
 
         public int UserId { get; set; }

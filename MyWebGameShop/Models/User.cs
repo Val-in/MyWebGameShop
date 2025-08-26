@@ -1,3 +1,5 @@
+using MyWebGameShop.Enums;
+
 namespace MyWebGameShop.Models;
 
 public class User
@@ -18,9 +20,7 @@ public class User
     public string Email { get; set; }
     public int WalletBalance { get; set; }
     public DateTime Joined { get; set; }
-    
-    public int RoleId { get; set; }
-    public Role Role { get; set; }
+    public RolesEnum Role { get; set; }
     
     public List<Order> Orders { get; set; }
     public List<Address> Addresses { get; set; }
