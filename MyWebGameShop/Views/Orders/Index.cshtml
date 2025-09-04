@@ -1,0 +1,36 @@
+@model IEnumerable<MyWebGameShop.Models.Order>  
+@{
+    ViewData["Title"] = "Мои заказы";
+}
+<h2 class="mb-3">Мои заказы</h2>
+
+@if (!Model.Any())
+{
+    <div class="alert alert-info">Пока заказов нет.</div>
+}
+else
+{
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Дата</th>
+            <th class="text-end">Сумма</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var o in Model)
+        {
+            <tr>
+                <td>@o.Id</td>
+                <td>@o.OrderDate.ToString("yyyy-MM-dd HH:mm")</td>
+                <td class="text-end">@o.TotalAmount</td>
+                <td class="text-end">
+                    <a asp-action="Details" asp-route-id="@o.Id" class="btn btn-sm btn-outline-secondary">Детали</a>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}

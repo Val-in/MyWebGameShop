@@ -1,4 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using MyWebGameShop.Data;
 using MyWebGameShop.Models;
 using MyWebGameShop.Services.Interfaces;
 
@@ -21,14 +23,14 @@ public class LogController : Controller // //LogController → просмотр/
         return Ok();
     }
     
-    /*Вывести все логи
+    //Вывести все логи
     [HttpGet("logs")] //запрос подконтроллера => получится logs/logs
-    public async Task<IActionResult> Index() //Пользователь → контроллер → создание Request → вызов LogService →
+    public async Task<IActionResult> Index([FromServices] AppDbContext db) //Пользователь → контроллер → создание Request → вызов LogService →
                                              //_context.Requests.Add() → SaveChangesAsync() → EF → SQL INSERT → Requests в БД
     {
-        var data = await _logService.GetLog
+        var data = await db.Requests
             .OrderByDescending(r => r.Date)
             .ToListAsync();
         return View(data);
-    }*/
+    }
 }

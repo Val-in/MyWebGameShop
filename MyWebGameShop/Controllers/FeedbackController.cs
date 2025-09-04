@@ -6,6 +6,7 @@ using MyWebGameShop.ViewModels.ErrorViewModel;
 
 namespace MyWebGameShop.Controllers;
 
+[Route("feedback")]
 public class FeedbackController : Controller
 {
     private readonly IFeedbackService _feedbackService;

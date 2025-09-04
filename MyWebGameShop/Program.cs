@@ -8,7 +8,7 @@ namespace MyWebGameShop
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static void Main(string[] args) //Надо ли добавлять сюда мапперы?
         {
             var builder = WebApplication.CreateBuilder(args);
             
@@ -28,6 +28,8 @@ namespace MyWebGameShop
             builder.Services.AddScoped<IProductService, ProductService>();
             builder.Services.AddScoped<ISubscriptionService, SubscriptionService>();
             builder.Services.AddScoped<IUserService, UserService>();
+
+            //builder.Services.AddAutoMapper(typeof(MyWebGameShop.MappingProfile.GameProfile).Assembly);
 
             /*(Если пользователь сделал запрос → сервис создаётся → работает пока идёт запрос → потом уничтожается).
             Есть ещё AddSingleton (один объект на всё приложение) и AddTransient (новый объект при каждом обращении).

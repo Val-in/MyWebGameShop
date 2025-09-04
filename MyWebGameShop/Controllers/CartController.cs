@@ -3,6 +3,7 @@ using MyWebGameShop.Services.Interfaces;
 
 namespace MyWebGameShop.Controllers;
 
+[Route("cart")]
 public class CartController : Controller
 {
     private readonly ICartService _cartService;
@@ -38,6 +39,5 @@ public class CartController : Controller
         _cartService.ClearCartAsync(userId);
         return RedirectToAction("Index");
     }
-
-    // Можно добавить метод Checkout
+    
 }

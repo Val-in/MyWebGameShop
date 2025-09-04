@@ -41,7 +41,7 @@ public class SubscriptionService : ISubscriptionService
                 SubscriptionEndDate = DateTime.UtcNow.AddMonths(1), // например, на месяц
                 LastPaymentDate = DateTime.UtcNow,
                 PaymentHistory = "",
-                PaymentMethod = "Unknown"
+                PaymentMethod = "Unknown",
             };
 
             _context.SubscriptionUserInfos.Add(newSub);

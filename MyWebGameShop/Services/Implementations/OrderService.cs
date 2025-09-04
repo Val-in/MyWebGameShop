@@ -41,4 +41,12 @@ public class OrderService : IOrderService
             .ThenInclude(ci => ci.Game)
             .ToListAsync();
     }
+
+    public async Task<List<Order>> GetOrderByIdAsync(Guid id)
+    {
+        return _context.Orders
+            .Where(o => o.Id == id)
+            .Include(o => o.CartItems)
+            .ToList();
+    }
 }

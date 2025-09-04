@@ -4,6 +4,7 @@ using MyWebGameShop.ViewModels;
 
 namespace MyWebGameShop.Controllers;
 
+[Route("orders")]
 public class OrderController : Controller //здесь мы используем ручной mapping
 {
     private readonly IOrderService _orderService;
@@ -11,6 +12,14 @@ public class OrderController : Controller //здесь мы используем
     public OrderController(IOrderService orderService)
     {
         _orderService = orderService;
+    }
+    
+    // GET /orders
+    [HttpGet("")]
+    public async Task<IActionResult> Index(int userId)
+    {
+        var list = await _orderService.GetOrderByUserAsync(userId);
+        return View(list);                 // Views/Order/Index.cshtml
     }
 
     [HttpGet("user/{userId}")]
@@ -57,4 +66,13 @@ public class OrderController : Controller //здесь мы используем
 
         return View("OrderDetails", orderVm); // Страница с деталями конкретного заказа
     }
+    
+    [HttpGet("{id:int}")]                  // URL: /orders/123
+    public async Task<IActionResult> Details(Guid id)
+    {
+        var order = await _orderService.GetOrderByIdAsync(id);
+        if (order == null) return NotFound();
+        return View("OrderDetails", order); // Views/Order/OrderDetails.cshtml
+    }
+
 }

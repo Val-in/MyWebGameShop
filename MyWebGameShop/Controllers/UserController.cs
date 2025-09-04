@@ -1,8 +1,6 @@
 using System.Security.Authentication;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using MyWebGameShop.Models;
 using MyWebGameShop.Services.Interfaces;
 using MyWebGameShop.ViewModels;
 
@@ -39,12 +37,4 @@ public class UserController
         return _mapper.Map<UserViewModel>(user); 
         
     }
-    
-    //Ошибка
-    // public async Task<IActionResult> Users()
-    // {
-    //     var users = await _userService.GetUsersAsync();
-    //     var userVms = _mapper.Map<List<UserViewModel>>(users);
-    //     return View(userVms);
-    // }
 }
