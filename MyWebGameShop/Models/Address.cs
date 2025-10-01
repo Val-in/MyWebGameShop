@@ -1,4 +1,4 @@
-﻿namespace MyWebGameShop.Models;
+namespace MyWebGameShop.Models;
 
 public class Address
 {
