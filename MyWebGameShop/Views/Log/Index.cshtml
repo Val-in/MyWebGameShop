@@ -1,0 +1,38 @@
+@model IEnumerable<MyWebGameShop.Models.Request>
+
+@{
+    Layout = "_Layout";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Лог запросов</title>
+</head>
+<body>
+<h1>Последние запросы</h1>
+
+<table style="border: 1px solid orangered; border-collapse: collapse;">
+    <thead>
+    <tr>
+        <th>Дата</th>
+        <th>URL</th>
+        <th>UserAgent</th>
+        <th>Entry</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var log in Model)
+    {
+        <tr>
+            <td>@log.Date.ToString("yyyy-MM-dd HH:mm:ss")</td>
+            <td>@log.Url</td>
+            <td>@log.UserAgent</td>
+            <td>@log.Entry</td>
+        </tr>
+    }
+    </tbody>
+</table>
+</body>
+</html>
