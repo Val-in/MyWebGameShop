@@ -1,0 +1,10 @@
+CREATE TABLE Addresses (
+    Id SERIAL PRIMARY KEY,
+    Country TEXT NOT NULL,
+    City TEXT NOT NULL,
+    Street TEXT NOT NULL,
+    Building INTEGER NOT NULL,
+    PostalCode INTEGER NOT NULL,
+    UserId INTEGER NOT NULL,
+    CONSTRAINT FK_Addresses_Users FOREIGN KEY (UserId) REFERENCES Users(Id) ON DELETE CASCADE
+);

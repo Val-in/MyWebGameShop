@@ -1,0 +1,8 @@
+﻿CREATE TABLE Requests (
+    Id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    UserAgent TEXT,
+    Date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    Url TEXT NOT NULL,
+    Entry TEXT,
+    IsLog BOOLEAN NOT NULL DEFAULT TRUE
+);

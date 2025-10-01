@@ -1,0 +1,8 @@
+CREATE TABLE ShopInfos (
+    Id SERIAL PRIMARY KEY,
+    Owner TEXT NOT NULL,
+    ContactId INTEGER NOT NULL,
+    AddressId INTEGER NOT NULL,
+    CONSTRAINT FK_ShopInfos_Contacts FOREIGN KEY (ContactId) REFERENCES Contacts(Id) ON DELETE CASCADE,
+    CONSTRAINT FK_ShopInfos_Addresses FOREIGN KEY (AddressId) REFERENCES Addresses(Id) ON DELETE CASCADE
+);

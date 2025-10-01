@@ -1,0 +1,33 @@
+@{
+    ViewData["Title"] = "Главная";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Добро пожаловать в магазин игр!</h1>
+    <p>Лучшие игры для вас и ваших друзей!</p>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <h3>Популярные игры</h3>
+    </div>
+</div>
+
+<div class="row">
+    <!-- Здесь будут карточки игр -->
+    @foreach (var game in Model.Games)
+    {
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <img src="@(string.IsNullOrEmpty(game.ImageUrl) ? "/images/no-image.jpg" : game.ImageUrl)" class="card-img-top" alt="@game.Title">
+                <div class="card-body">
+                    <h5 class="card-title">@game.Title</h5>
+                    <p class="card-text">@game.Description</p>
+                    <p class="card-text"><strong>Цена: @game.Price ₽</strong></p>
+                    <a href="/Products/Details/@game.Id" class="btn btn-primary">Подробнее</a>
+                    <a href="/Cart/Add/@game.Id" class="btn btn-success">В корзину</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>

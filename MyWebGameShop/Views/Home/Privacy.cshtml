@@ -1,0 +1,27 @@
+﻿@{
+    ViewData["Title"] = "Privacy Policy";
+}
+<h1>@ViewData["Title"]</h1>
+
+<div class="text-center">
+    <p>Use this page to detail your site's privacy policy.</p>
+    <h2 class="display-4" style="text-align: left">Пользователи проекта</h2>
+    <br>
+    <table>
+        <tr>
+            <td>Идентификатор</td>
+            <td>Имя</td>
+            <td>Дата регистрации</td>
+        </tr>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>@user.Id</td>
+                <td>@user.FirstName</td>
+                <td>@user.JoinDate</td>
+            </tr>
+        }
+    </table>
+</div>
+
+

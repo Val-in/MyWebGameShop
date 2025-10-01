@@ -1,0 +1,10 @@
+@model MyWebGameShop.ViewModels.GameDetailsViewModel
+@{
+    ViewData["Title"] = @Model.Title;
+}
+<h2>@Model.Title</h2>
+<p>@Model.Description</p>
+<p>Жанр: @Model.Genre</p>
+<p>Платформа: @Model.Platform</p>
+<p>Категория: @Model.Category</p>
+<p><strong>Цена: @Model.Price</strong></p>

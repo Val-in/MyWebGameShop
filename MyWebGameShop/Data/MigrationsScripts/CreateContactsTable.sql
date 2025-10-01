@@ -1,0 +1,6 @@
+CREATE TABLE Contacts (
+    Id SERIAL PRIMARY KEY,
+    Email TEXT NOT NULL,
+    Phone TEXT NOT NULL,
+    Fax TEXT
+);

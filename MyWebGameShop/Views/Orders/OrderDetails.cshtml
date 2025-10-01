@@ -1,0 +1,24 @@
+@model MyWebGameShop.ViewModels.OrderViewModel
+@{
+    ViewData["Title"] = $"Заказ #{Model.Id}";
+}
+<h2>Заказ #@Model.Id</h2>
+<p>Дата: @Model.CreatedAt.ToString("yyyy-MM-dd HH:mm")</p>
+<p><strong>Итого: @Model.TotalAmount</strong></p>
+
+@if (Model.Items != null && Model.Items.Any())
+{
+    <table class="table">
+        <thead><tr><th>Игра</th><th class="text-end">Цена</th><th class="text-center">Кол-во</th></tr></thead>
+        <tbody>
+        @foreach (var i in Model.Items)
+        {
+            <tr>
+                <td>@i.Title</td>
+                <td class="text-end">@i.Price</td>
+                <td class="text-center">@i.Quantity</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}

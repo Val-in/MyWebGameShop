@@ -1,0 +1,12 @@
+CREATE TABLE Users (
+    Id SERIAL PRIMARY KEY,
+    UserName TEXT NOT NULL,
+    LastName TEXT,
+    UserAgent TEXT,
+    Login TEXT NOT NULL,
+    Password TEXT NOT NULL,
+    Email TEXT NOT NULL,
+    WalletBalance NUMERIC(18,2) NOT NULL,
+    Joined TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    Role INTEGER NOT NULL DEFAULT 2
+);

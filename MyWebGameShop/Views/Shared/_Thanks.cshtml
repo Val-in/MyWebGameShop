@@ -1,0 +1,13 @@
+@model MyWebGameShop.ViewModels.ThankViewModel;
+@{
+    ViewBag.Title = "Thanks"; //ViewBag — динамический объект для передачи данных из контроллера в view.
+    Layout = "_Layout"; //MVC сам подставит _Thank.cshtml в Layout, где есть @RenderBody().
+}
+
+<div class="text-center"> 
+    <br>
+    <div>
+        <br>
+        <p>@Model.UserName, спасибо за регистрацию!</p>
+    </div>
+</div>

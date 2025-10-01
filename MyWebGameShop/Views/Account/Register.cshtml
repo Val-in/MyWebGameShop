@@ -1,0 +1,43 @@
+@model MyWebGameShop.ViewModels.RegisterViewModel
+@{
+    ViewData["Title"] = "Регистрация";
+}
+<h2>Регистрация</h2>
+<form asp-action="Register" method="post">
+    <div>
+        <label asp-for="UserName"></label>
+        <input asp-for="UserName" />
+        <span asp-validation-for="UserName"></span>
+    </div>
+    <div>
+        <label asp-for="LastName"></label>
+        <input asp-for="LastName" />
+        <span asp-validation-for="LastName"></span>
+    </div>
+    <div>
+        <label asp-for="Login"></label>
+        <input asp-for="Login" />
+        <span asp-validation-for="Login"></span>
+    </div>
+    <div>
+        <label asp-for="Email"></label>
+        <input asp-for="Email" />
+        <span asp-validation-for="Email"></span>
+    </div>
+    <div>
+        <label asp-for="Password"></label>
+        <input asp-for="Password" type="password" />
+        <span asp-validation-for="Password"></span>
+    </div>
+    @* Если оставляешь выбор роли *@
+    @* <div>
+        <label asp-for="Role"></label>
+        <select asp-for="Role" asp-items="Html.GetEnumSelectList<MyWebGameShop.Enums.RolesEnum>()"></select>
+        <span asp-validation-for="Role"></span>
+    </div> *@
+
+    <button type="submit">Создать</button>
+</form>
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,41 @@
+@model IEnumerable<MyWebGameShop.Models.CartItem>
+@{
+    ViewData["Title"] = "Корзина";
+}
+<h2>Корзина</h2>
+
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>Игра</th>
+        <th>Цена</th>
+        <th>Кол-во</th>
+        <th>Итого</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var i in Model)
+    {
+        <tr>
+            <td>@i.Game?.Title</td>
+            <td>@i.Game?.Price</td>
+            <td>@i.Quantity</td>
+            <td>@((i.Game?.Price ?? 0) * i.Quantity)</td>
+            <td>
+                <form asp-action="Remove" method="post">
+                    <input type="hidden" name="cartItemId" value="@i.Id"/>
+                    <button type="submit" class="btn btn-sm btn-danger">Удалить</button>
+                </form>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+<form asp-action="Clear" method="post" class="mt-3">
+    <div class="input-group">
+        <input type="number" class="form-control" name="userId" placeholder="ID пользователя">
+        <button type="submit" class="btn btn-warning">Очистить корзину</button>
+    </div>
+</form>

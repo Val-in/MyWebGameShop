@@ -1,0 +1,20 @@
+@model IEnumerable<MyWebGameShop.ViewModels.GameDetailsViewModel>
+@{
+    ViewData["Title"] = "Каталог игр";
+}
+<h2>Каталог</h2>
+<div class="row">
+    @foreach (var g in Model)
+    {
+        <div class="col-md-4 mb-3">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">@g.Title</h5>
+                    <p>@g.Description</p>
+                    <p><strong>@g.Price</strong></p>
+                    <a asp-controller="Products" asp-action="Details" asp-route-id="@g.Id" class="btn btn-primary">Подробнее</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>
