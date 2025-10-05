@@ -1,4 +1,4 @@
-﻿CREATE TABLE Feedbacks (
+CREATE TABLE Feedbacks (
     Id SERIAL PRIMARY KEY,
     FromEmail TEXT NOT NULL,
     Text TEXT NOT NULL,

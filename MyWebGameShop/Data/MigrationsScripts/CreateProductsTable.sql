@@ -1,4 +1,4 @@
-﻿CREATE TABLE Products (
+CREATE TABLE Products (
     Id SERIAL PRIMARY KEY,
     Name TEXT NOT NULL,
     Description TEXT,

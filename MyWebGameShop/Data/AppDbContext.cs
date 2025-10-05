@@ -41,7 +41,7 @@ public class AppDbContext : DbContext
         modelBuilder.Entity<SubscriptionUserInfo>().ToTable("SubscriptionUserInfos");
         modelBuilder.Entity<Address>().ToTable("Addresses");
         modelBuilder.Entity<Contact>().ToTable("Contacts");
-        modelBuilder.Entity<Feedback>().ToTable("Feedbacks");
+        modelBuilder.Entity<Feedback>().ToTable("Feedbacks"); 
         modelBuilder.Entity<ShopInfo>().ToTable("ShopInfos");
         modelBuilder.Entity<MainPage>().ToTable("MainPages");
         modelBuilder.Entity<Recommendation>().ToTable("Recommendations");

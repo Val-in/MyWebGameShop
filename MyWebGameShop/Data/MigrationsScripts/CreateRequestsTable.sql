@@ -1,4 +1,4 @@
-﻿CREATE TABLE Requests (
+CREATE TABLE Requests (
     Id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     UserAgent TEXT,
     Date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
